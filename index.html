@@ -25,8 +25,10 @@
         justify-content: center;
         padding: 24px;
       }
+      /* ===== Default: Medium (tablet, e.g. iPad) =====
+         Terminal fills the viewport width. */
       .terminal {
-        width: min(900px, 100%);
+        width: 100%;
         height: min(640px, 90vh);
         min-height: 420px;
         background: var(--bg);
@@ -36,9 +38,22 @@
         flex-direction: column;
         overflow: hidden;
       }
-      /* Mobile / narrow screens: shrink padding and let ASCII art scroll
-         horizontally inside the terminal instead of overflowing the page. */
-      @media (max-width: 700px) {
+
+      /* ===== Large (desktop, >= 1024px) =====
+         Fixed 900px terminal centered on the page. */
+      @media (min-width: 1024px) {
+        .terminal {
+          width: 900px;
+          min-width: 900px;
+          min-height: 600px;
+        }
+      }
+
+      /* ===== Small (phone, < 600px) =====
+         Edge-to-edge terminal and ASCII art that auto-shrinks to viewport.
+         Monospace char width ~= 0.6 * font-size, ASCII art is ~80 chars,
+         so font-size must be <= (available width) / (80 * 0.6) = / 48. */
+      @media (max-width: 599px) {
         body { padding: 8px; }
         .terminal {
           height: 100vh;
@@ -46,7 +61,11 @@
           min-height: 0;
           border-radius: 0;
         }
-        .screen { font-size: 11px; padding: 10px 12px; }
+        .screen {
+          padding: 8px 10px;
+          font-size: min(13px, calc((100vw - 36px) / 48));
+          line-height: 1.15;
+        }
         .title { font-size: 11px; }
       }
       .titlebar {
