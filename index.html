@@ -52,10 +52,12 @@
       /* ===== Small (phone, < 600px) =====
          Edge-to-edge terminal with the smaller "mini" figlet ASCII art
          (~42 chars wide). Monospace char width ~= 0.6 * font-size, so we
-         allow up to (100vw - 28px) / (42 * 0.6) = / 25.2, capped at 14px. */
+         allow up to 100vw / (42 * 0.6) = / 25.2, capped at 14px. */
       @media (max-width: 599px) {
-        body { padding: 8px; }
+        body { padding: 0; }
         .terminal {
+          width: 100vw;
+          min-width: 100vw;
           height: 100vh;
           height: 100dvh;
           min-height: 0;
@@ -63,7 +65,7 @@
         }
         .screen {
           padding: 8px 10px;
-          font-size: min(14px, calc((100vw - 28px) / 25.2));
+          font-size: min(14px, calc(100vw / 25.2));
           line-height: 1.2;
         }
         .title { font-size: 11px; }
