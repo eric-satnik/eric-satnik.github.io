@@ -50,10 +50,10 @@
       }
 
       /* ===== Small (phone, < 600px) =====
-         Edge-to-edge terminal with the "doom" figlet ASCII art (~80 chars
-         wide for "Just Build Robots!"). Monospace char width ~= 0.6 *
-         font-size, so font-size = 100vw / (80 * 0.6) = 100vw / 48,
-         capped at 13px so it never gets larger than desktop. */
+         Edge-to-edge terminal with the "digital" figlet ASCII art (~37
+         chars wide for "Just Build Robots!"). Monospace char width ~=
+         0.6 * font-size, so font-size = 100vw / (37 * 0.6) = 100vw / 22.2,
+         capped at 16px. */
       @media (max-width: 599px) {
         body { padding: 0; }
         .terminal {
@@ -65,9 +65,9 @@
           border-radius: 0;
         }
         .screen {
-          padding: 8px 6px;
-          font-size: min(13px, calc(100vw / 48));
-          line-height: 1.15;
+          padding: 8px 8px;
+          font-size: min(16px, calc(100vw / 22.2));
+          line-height: 1.2;
         }
         .title { font-size: 11px; }
       }
@@ -158,26 +158,17 @@
         "               |___/                                |___/        ",
       ];
 
-      // ASCII art (figlet "doom" font) — used on small/phone viewports
+      // ASCII art (figlet "digital" font) — used on small/phone viewports
       const ASCII_ROBOTS_SMALL = [
-        "   ___           _    ______       _ _     _  ______      _           _       _ ",
-        "  |_  |         | |   | ___ \\     (_) |   | | | ___ \\    | |         | |     | |",
-        "    | |_   _ ___| |_  | |_/ /_   _ _| | __| | | |_/ /___ | |__   ___ | |_ ___| |",
-        "    | | | | / __| __| | ___ \\ | | | | |/ _` | |    // _ \\| '_ \\ / _ \\| __/ __| |",
-        "/\\__/ / |_| \\__ \\ |_  | |_/ / |_| | | | (_| | | |\\ \\ (_) | |_) | (_) | |_\\__ \\_|",
-        "\\____/ \\__,_|___/\\__| \\____/ \\__,_|_|_|\\__,_| \\_| \\_\\___/|_.__/ \\___/ \\__|___(_)",
-        "                                                                                ",
+        "+-+-+-+-+ +-+-+-+-+-+ +-+-+-+-+-+-+-+",
+        "|J|u|s|t| |B|u|i|l|d| |R|o|b|o|t|s|!|",
+        "+-+-+-+-+ +-+-+-+-+-+ +-+-+-+-+-+-+-+",
       ];
 
       const ASCII_BINGO_SMALL = [
-        "______ _                    ______                         _ ",
-        "| ___ (_)                   | ___ \\                       | |",
-        "| |_/ /_ _ __   __ _  ___   | |_/ / __ _ _ __   __ _  ___ | |",
-        "| ___ \\ | '_ \\ / _` |/ _ \\  | ___ \\/ _` | '_ \\ / _` |/ _ \\| |",
-        "| |_/ / | | | | (_| | (_) | | |_/ / (_| | | | | (_| | (_) |_|",
-        "\\____/|_|_| |_|\\__, |\\___/  \\____/ \\__,_|_| |_|\\__, |\\___/(_)",
-        "                __/ |                           __/ |        ",
-        "               |___/                           |___/         ",
+        "+-+-+-+-+-+ +-+-+-+-+-+-+",
+        "|B|i|n|g|o| |B|a|n|g|o|!|",
+        "+-+-+-+-+-+ +-+-+-+-+-+-+",
       ];
 
       // Pick the right size for the current viewport (matches CSS @media small)
