@@ -26,16 +26,28 @@
         padding: 24px;
       }
       .terminal {
-        width: 900px;
-        min-width: 900px;
+        width: min(900px, 100%);
         height: min(640px, 90vh);
-        min-height: 600px;
+        min-height: 420px;
         background: var(--bg);
         border-radius: 10px;
         box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px #222 inset;
         display: flex;
         flex-direction: column;
         overflow: hidden;
+      }
+      /* Mobile / narrow screens: shrink padding and let ASCII art scroll
+         horizontally inside the terminal instead of overflowing the page. */
+      @media (max-width: 700px) {
+        body { padding: 8px; }
+        .terminal {
+          height: 100vh;
+          height: 100dvh;
+          min-height: 0;
+          border-radius: 0;
+        }
+        .screen { font-size: 11px; padding: 10px 12px; }
+        .title { font-size: 11px; }
       }
       .titlebar {
         background: linear-gradient(#2b2b2b, #1c1c1c);
