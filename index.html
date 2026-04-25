@@ -50,9 +50,9 @@
       }
 
       /* ===== Small (phone, < 600px) =====
-         Edge-to-edge terminal and ASCII art that auto-shrinks to viewport.
-         Monospace char width ~= 0.6 * font-size, ASCII art is ~80 chars,
-         so font-size must be <= (available width) / (80 * 0.6) = / 48. */
+         Edge-to-edge terminal with the smaller "mini" figlet ASCII art
+         (~42 chars wide). Monospace char width ~= 0.6 * font-size, so we
+         allow up to (100vw - 28px) / (42 * 0.6) = / 25.2, capped at 14px. */
       @media (max-width: 599px) {
         body { padding: 8px; }
         .terminal {
@@ -63,8 +63,8 @@
         }
         .screen {
           padding: 8px 10px;
-          font-size: min(13px, calc((100vw - 36px) / 48));
-          line-height: 1.15;
+          font-size: min(14px, calc((100vw - 28px) / 25.2));
+          line-height: 1.2;
         }
         .title { font-size: 11px; }
       }
@@ -136,7 +136,7 @@
         </>
       );
 
-      // ASCII art (figlet "Standard" font)
+      // ASCII art (figlet "Standard" font) — used on tablet/desktop
       const ASCII_ROBOTS = [
         "     _           _     ____        _ _     _   ____        _           _       _ ",
         "    | |_   _ ___| |_  | __ ) _   _(_) | __| | |  _ \\ ___ | |__   ___ | |_ ___| |",
@@ -155,16 +155,36 @@
         "               |___/                                |___/        ",
       ];
 
+      // ASCII art (figlet "mini" font) — used on small/phone viewports
+      const ASCII_ROBOTS_SMALL = [
+        "             _           _                ",
+        "  |    __|_ |_)   o| _| |_) _ |_  __|_ _| ",
+        "\\_||_|_> |_ |_)|_|||(_| | \\(_)|_)(_)|__>o ",
+        "                                          ",
+      ];
+
+      const ASCII_BINGO_SMALL = [
+        " _             _               ",
+        "|_)o._  _  _  |_) _.._  _  _ | ",
+        "|_)|| |(_|(_) |_)(_|| |(_|(_)o ",
+        "        _|              _|     ",
+      ];
+
+      // Pick the right size for the current viewport (matches CSS @media small)
+      const IS_SMALL = window.matchMedia("(max-width: 599px)").matches;
+      const ROBOTS = IS_SMALL ? ASCII_ROBOTS_SMALL : ASCII_ROBOTS;
+      const BINGO = IS_SMALL ? ASCII_BINGO_SMALL : ASCII_BINGO;
+
       // Script: type a command, then "print" the ASCII art line by line.
       const SCRIPT = [
         { type: "cmd", text: "figlet 'Just Build Robots!'" },
-        ...ASCII_ROBOTS.map((text) => ({ type: "out", text })),
+        ...ROBOTS.map((text) => ({ type: "out", text })),
         { type: "out", text: "" },
         { type: "prompt" },
         { type: "prompt" },
         { type: "prompt" },
         { type: "cmd", text: "figlet 'Bingo Bango!'" },
-        ...ASCII_BINGO.map((text) => ({ type: "out", text })),
+        ...BINGO.map((text) => ({ type: "out", text })),
         { type: "out", text: "" },
       ];
 
